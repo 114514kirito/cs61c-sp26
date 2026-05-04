@@ -7,7 +7,7 @@ UC Berkeley CS61C: Great Ideas in Computer Architecture (Machine Structures) —
 | 项目 | 主题 | 测试通过情况 | 完成度 |
 |------|------|-------------|--------|
 | **Project 1: snek** | C 语言贪吃蛇游戏 | 22/22 集成测试, 10/10 单元测试, 全部 custom 测试通过 | 100% |
-| **Project 2: CS61Classify** | RISC-V 神经网络汇编 | 46/46 单元测试通过, 覆盖率部分(损失函数)未实现 | 90% |
+| **Project 2: CS61Classify** | RISC-V 神经网络汇编 | 46/46 单元测试, 18/18 覆盖率测试全部通过 | 100% |
 | **Project 3: CS61CPU** | Logisim 五级流水线 CPU | Part A 13/13 通过, Part B 仅 3/28 通过 | 40% |
 
 ## 实验概览
@@ -50,14 +50,16 @@ make custom-tests                          # 全部通过
 - `matmul.s` — 矩阵乘法
 - `read_matrix.s` / `write_matrix.s` — 文件 I/O
 - `classify.s` — 主分类流程
+- `abs_loss.s` — 绝对值损失函数
+- `squared_loss.s` — 平方损失函数
+- `zero_one_loss.s` — 0-1 损失函数
+- `initialize_zero.s` — 零数组初始化
 
 ```bash
 cd sp26-proj2-starter
 bash test.sh all       # 46 项全部通过
-bash test.sh coverage  # 4 项失败 (损失函数未实现, 属于可选扩展)
+bash test.sh coverage  # 18 项全部通过 (含四个损失函数)
 ```
-
-> 未完成: 覆盖率部分的四个损失函数 (`abs_loss.s`, `zero_one_loss.s`, `squared_loss.s`, `initialize_zero.s`) 仍为 TODO 状态。
 
 ### Project 3: CS61CPU (五级流水线 RISC-V CPU)
 
@@ -85,9 +87,9 @@ bash test.sh part_b   # 3/28 通过
 | 维度 | 评分 | 说明 |
 |------|------|------|
 | C 语言编程 | ★★★★★ | Proj1 完整体现指针/内存管理/文件 I/O 能力 |
-| RISC-V 汇编 | ★★★★☆ | Proj2 核心函数完成良好, 缺损失函数扩展 |
+| RISC-V 汇编 | ★★★★★ | Proj2 所有函数(含损失函数)全部完成, 46 单元+18 覆盖率测试通过 |
 | CPU 设计 | ★★☆☆☆ | Part A 扎实, Part B 大部分电路尚需实现 |
 | 并行编程 | ★★★★★ | Lab07 OpenMP 部分完整, 加速比显著 |
 | 调试能力 | ★★★★☆ | Lab02 大部分完成, 部分文本答案未填 |
 
-**总评**: 项目 1 和项目 2 核心部分完成度很高, 代码质量经全部本地测试验证。项目 3 Part B 是主要短板 — 分支比较器(BrEq/BrLt 输出未接线)、立即数生成器(B/J/S/U-type 位拼接有误)、部分加载/存储等子电路均需完善, 导致集成测试大面积失败。建议优先完成 branch-comp 和 imm-gen, 它们是后续集成测试通过的前提。
+**总评**: 项目 1 和项目 2 全部完成, 所有单元测试和覆盖率测试均通过。项目 3 Part B 是主要短板 — 分支比较器(BrEq/BrLt 输出未接线)、立即数生成器(B/J/S/U-type 位拼接有误)、部分加载/存储等子电路均需完善, 导致集成测试大面积失败。建议优先完成 branch-comp 和 imm-gen, 它们是后续集成测试通过的前提。
